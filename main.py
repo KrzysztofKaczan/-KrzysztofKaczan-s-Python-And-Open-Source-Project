@@ -19,6 +19,8 @@ screen.onkey(snake.down, "Down")
 screen.onkey(snake.right,"Right")
 screen.onkey(snake.left,"Left")
 
+game_on = True
+
 def restart_game():
     global game_on
     game_on = True
@@ -27,28 +29,30 @@ def restart_game():
     food.refresh()          
     game_loop()             
 
-game_on = True
-while game_on:
-    screen.update()
-    time.sleep(0.1)
-    snake.move()
+
+def game_loop():
+    global game_on
+    while game_on:
+        screen.update()
+        time.sleep(0.1)
+        snake.move()
 
     #colision 
-    if snake.head.distance(food) < 15:
-        food.refresh()
-        snake.extend()
-        scorebord.increase_score()
+        if snake.head.distance(food) < 15:
+            food.refresh()
+            snake.extend()
+            scorebord.increase_score()
 
     #wall col 
-    if snake.head.xcor()>290 or snake.head.xcor() < -290 or snake.head.ycor() > 290 or snake.head.ycor() < -290:
-        game_on = False
-        scorebord.game_over()
+        if snake.head.xcor()>290 or snake.head.xcor() < -290 or snake.head.ycor() > 290 or snake.head.ycor() < -290:
+            game_on = False
+            scorebord.game_over()
 
     #ogonwazki 
-    for segment in snake.segments[1:]:
-         if snake.head.distance(segment) < 10: 
-            game_on = False 
-            scorebord.game_over()
+        for segment in snake.segments[1:]:
+             if snake.head.distance(segment) < 10: 
+                game_on = False 
+                scorebord.game_over()
 
 screen.onkey(restart_game, "r")  
 
