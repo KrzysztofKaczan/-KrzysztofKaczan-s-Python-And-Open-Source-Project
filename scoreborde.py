@@ -16,10 +16,16 @@ class Scorebord(Turtle):
 
     def game_over(self): 
          self.goto(0,0)
-         self.write(f"GAME OVER", align = "center", font = ("Arial", 24, "normal"))
+         self.write(f"GAME OVER\n press r to reset", align = "center", font = ("Arial", 24, "normal"))
     
     def increase_score(self): 
         self.score += 1 
         self.clear()
+        self.update_score()
+
+    def reset_score(self):
+        self.clear()
+        self.goto(0, 250)
+        self.score = 0
         self.update_score()
         
