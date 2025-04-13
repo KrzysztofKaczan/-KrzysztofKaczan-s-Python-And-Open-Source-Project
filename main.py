@@ -19,6 +19,14 @@ screen.onkey(snake.down, "Down")
 screen.onkey(snake.right,"Right")
 screen.onkey(snake.left,"Left")
 
+def restart_game():
+    global game_on
+    game_on = True
+    scorebord.reset_score()  
+    snake.reset_position()    
+    food.refresh()          
+    game_loop()             
+
 game_on = True
 while game_on:
     screen.update()
@@ -42,5 +50,8 @@ while game_on:
             game_on = False 
             scorebord.game_over()
 
+screen.onkey(restart_game, "r")  
+
+game_loop()
     
 screen.exitonclick()
